@@ -6,10 +6,6 @@ A web application that would allow users to store, modify and observe their cryp
 Another feature, aimed mostly at people who just begin investing in cryptocurrencies is price prediction. Using machine learning, the website is supposed to predict how the price will change in the following days, aiding less experienced or indecisive users with help on what might be worth investing
 into.
 
-## Documentation
-
-Detailed documentation is available [here](doc/Documentation.pdf).
-
 ## Environment
 
 Environment used in Conda can be recreated using:
