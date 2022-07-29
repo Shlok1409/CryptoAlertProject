@@ -1,0 +1,101 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+
+<div id="window-app2" class = "modal">
+    <div class = "modal-content">
+        <input type="text" id="myInput2" onkeyup="search()" placeholder="Search for Crypto..." style = "margin-bottom: 20px;"></input>
+        <div class="panel-body table-responsive">
+            {% if unique_user_data %}            
+                {% for asset in unique_user_data %}
+                    <button class = "collapsible" id="{{asset.id}}" style = "width: 100%; margin-bottom: 10px;">
+                        <div class = "content">     
+                            <img src="{{asset.img}}" height="70px" alt="Coin Logo">
+                            <div class = "p">{{asset.name}}</div>
+                        </div> 
+                    </button>                  
+                {% endfor %}            
+            {% else %}            
+                <p>Nothing Here to show</p>            
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if plot %}
+    <div id="balance-plot" style="padding-top: 20px;">
+        <button class="btn btn-primary btn-lg add-button" onclick="show_window2()" id="test2">Show account balance for...</button>
+        <img style="padding-top: 20px;" src="data:image/png;base64, {{plot|safe}}">
+    </div>  
+{% endif %}
+
+<div style="text-align: center; padding-bottom: 0px; padding-top: 20px;">
+    <button class="btn btn-primary btn-lg add-button" onclick="show_window()">Add asset</button>
+</div> 
+
+<div id="window-app" class = "modal">
+    <div class = "modal-content">
+        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for Crypto..." style = "margin-bottom: 20px;"></input>
+        <div class="panel-body table-responsive">
+            {% if api_data %}            
+                {% for coin in api_data %}
+                    <button class = "collapsible" id="{{coin.id}}" style = "width: 100%; margin-bottom: 10px;">
+                        <div class = "content">     
+                            <img src="{{coin.image}}" height="70px" alt="Coin Logo">
+                            <div class = "p">{{coin.name}}</div>
+                            <div style="display: none;" class = "price">{{coin.current_price}} USD</div> 
+                        </div> 
+                    </button>                  
+                {% endfor %}            
+            {% else %}            
+                <p>Nothing Here to show</p>            
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div id="balance-box">
+    <h4>Total Account Balance: {{total}}$</h4>
+</div>
+
+<div class = "containerr" id="user_port" style = "display: block" >
+    <div class = "table_responsive">
+        <div class = "table_responsive_head"> 
+            <table class = "inner_table_responsive">
+                <thead>
+                    <tr class = "TRTR">
+                        <th class = "TRTH">Logo</th>                              
+                        <th class = "TRTH">Name</th>                
+                        <th class = "TRTH">Amount</th>
+                        <th class = "TRTH">Current Price</th>
+                        <th class = "TRTH">24h</th>
+                        <th class = "TRTH">Holdings</th>
+                        <th class = "TRTH">Profit</th>
+                    </tr>
+                </thead>
+            </table>
+        </div> <!--table_responsive_head-->
+        <div class = "table_responsive_body">
+            <table class = "inner_table_responsive">
+                <tbody>
+                    {% if user_data %}           
+                        {% for data in user_data %}
+                            <tr class = "TRTR">
+                                <td class = "TRTD"><img src="{{data.img}}" height="50px" alt="Coin Logo"></td> 
+                                <td class = "TRTD">{{data.name}}</td>           
+                                <td class = "TRTD">{{data.amount}}</td>
+                                <td class = "TRTD">{{data.price}} USD</td>
+                                <td class = "TRTD">{{data.24h}} %</td>
+                                <td class = "TRTD">{{data.holdings}}</td>
+                                <td class = "TRTD">{{data.profit}} USD</td>
+                            </tr>           
+                        {% endfor %}            
+                    {% else %}            
+                        <p>Your portfolio is empty</p>       
+                    {% endif %}
+                </tbody>
+            </table>
+        </div> <!--table_responsive_body-->
+    </div> <!--table_responsive-->
+</div>   
+{% endblock content %}
